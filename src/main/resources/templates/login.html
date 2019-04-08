@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/statics/assets/layui/css/layui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/statics/css/login/css/style.css}" />
+    <script type="text/javascript" th:src="@{/statics/assets/layui/layui.js}"></script>
+    <title>登录</title>
+</head>
+<body onload='document.f.username.focus();'>
+<div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+</div>
+
+<div class="container">
+
+
+    <div id="login">
+
+        <form method="post" th:action="@{/login}">
+
+            <fieldset class="clearfix">
+
+                <p><span class="fontawesome-user"></span><input type="text" name="username" onBlur="if(this.value == '') this.value = 'username'" onFocus="if(this.value == 'username') this.value = ''" required="required"/></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                <p><span class="fontawesome-lock"></span><input type="password"  name="password" onBlur="if(this.value == '') this.value = 'password'" onFocus="if(this.value == 'password') this.value = ''" required="required" /></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                <p><input type="submit" value="Sign In" /></p>
+
+            </fieldset>
+
+        </form>
+
+        <p>没账号? <a href="#" class="blue">注册账号</a><span class="fontawesome-arrow-right"></span></p>
+
+    </div> <!-- end login -->
+
+</div>
+</body>
+</html>
