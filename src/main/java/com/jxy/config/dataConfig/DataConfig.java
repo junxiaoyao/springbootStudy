@@ -1,16 +1,23 @@
 package com.jxy.config.dataConfig;
+
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import javax.sql.DataSource;
 import java.sql.SQLException;
+
 @Configuration
 @PropertySource("classpath:jdbc.properties")
 @EnableTransactionManagement//开启事务及对注解@Transactional的支持
-//@EnableJpaRepositories(basePackages = "com.jxy.repository")//扫描Repository包
+@EnableJpaRepositories(basePackages = "com.jxy.repository")//扫描Repository包
+@EntityScan(basePackages = "com.jxy.entity")
 public class DataConfig {
     //数据库url
     @Value("${spring.datasource.url}")
@@ -93,11 +100,12 @@ public class DataConfig {
         datasource.setConnectionProperties(connectionProperties);
         return datasource;
     }
-//    //jdbcTemplate配置
-//    @Bean
-//    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-//        return new JdbcTemplate(dataSource);
-//    }
+
+    //jdbcTemplate配置
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
 //
 //    //spring容器方式的entity工厂
 //    @Bean
