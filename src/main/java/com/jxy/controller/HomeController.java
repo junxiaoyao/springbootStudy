@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Auther: ybl
  * @Date: 2018/12/14 0014 11:07
@@ -34,5 +37,8 @@ public class HomeController {
         model.addAttribute("user", user);
         return "homePage";
     }
-
+    @RequestMapping("login")
+    public String loginGet(HttpServletRequest request) {
+        return "login";
+    }
 }
