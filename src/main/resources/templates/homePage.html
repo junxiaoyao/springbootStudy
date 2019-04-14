@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>显示学生信息</title>
+    <title>商场主页</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta charset="UTF-8" />
@@ -20,8 +20,9 @@
             <a th:href="@{/}">首页</a>
         </p>
         <div class="sn-quick-menu">
-            <div class="login"><a th:href="login.html">登录</a></div>
+            <!--<div class="login"><a th:href="login.html">登录</a></div>-->
             <div class="login"><a th:href="@{/test/userInfo}"><p th:text="${user.userName}"></p></a></div>
+            <div class="login"><a th:href="@{/logout}">退出</a></div>
             <div class="sp-cart"><a th:href="shopcart.html">购物车</a><span>2</span></div>
         </div>
     </div>

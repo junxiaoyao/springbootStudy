@@ -39,7 +39,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .loginProcessingUrl("/login")
                 //失败重新登录
-                .failureUrl("/login")
+                .failureUrl("/login?error=true")
+                .and().logout().permitAll()
                 //成功进入主界面
                 // .successForwardUrl("/")
                 .and().authorizeRequests().antMatchers("/").hasRole("ADMIN");
