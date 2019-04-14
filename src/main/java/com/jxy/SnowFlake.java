@@ -37,16 +37,16 @@ public class SnowFlake {
         return snowFlake.nextId();
     }
 
-    public static void main(String[] args) {
-        SnowFlake idWorker = new SnowFlake(0L, 0L);
-
-        for(int i = 0; i < 1000; ++i) {
-            long id = idWorker.nextId();
-            System.out.println(Long.toBinaryString(id));
-            System.out.println(id);
-        }
-
-    }
+//    public static void main(String[] args) {
+//        SnowFlake idWorker = new SnowFlake(0L, 0L);
+//
+//        for(int i = 0; i < 1000; ++i) {
+//            long id = idWorker.nextId();
+//            System.out.println(Long.toBinaryString(id));
+//            System.out.println(id);
+//        }
+//
+//    }
 
     private SnowFlake(long workerId, long datacenterId) {
         if (workerId <= 31L && workerId >= 0L) {
