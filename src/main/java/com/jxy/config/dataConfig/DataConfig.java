@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Configuration
-@PropertySource("classpath:config/jdbc.properties")
+//@PropertySource("classpath:config/jdbc.properties")
 @EnableTransactionManagement//开启事务及对注解@Transactional的支持
 @EnableJpaRepositories(basePackages = "com.jxy.repository")//扫描Repository包
 @EntityScan(basePackages = "com.jxy.entity")

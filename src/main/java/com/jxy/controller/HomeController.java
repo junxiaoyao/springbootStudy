@@ -54,7 +54,7 @@ public class HomeController {
 
     @RequestMapping("logout")
     public String logout(HttpServletRequest request) {
+        SecurityContextHolder.clearContext();
         return "login";
     }
-
 }
