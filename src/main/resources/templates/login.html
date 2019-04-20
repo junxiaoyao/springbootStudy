@@ -7,7 +7,7 @@
     <script type="text/javascript" th:src="@{/assets/layui/layui.js}"></script>
     <title>登录</title>
 </head>
-<body >
+<body>
 <div id="clouds">
     <div class="cloud x1"></div>
     <!-- Time for multiple clouds to dance around -->
@@ -19,7 +19,7 @@
 
 <div class="container">
 
-    <input id="error" th:value="${error}" type="hidden"></input>
+    <input id="error" type="hidden" th:value="${error}"></input>
     <div id="login">
 
         <form method="post" th:action="@{/login}">
@@ -36,6 +36,7 @@
                                                                 onFocus="if(this.value == 'password') this.value = ''"
                                                                 required="required"/></p>
                 <!-- JS because of IE support; better: placeholder="Password" -->
+
                 <p><input type="submit" value="登录"/></p>
 
             </fieldset>
@@ -71,7 +72,7 @@
     });
 
     function loginError() {
-        var error = $('#error');
+        var error = $('#error').val();
         if (error) {
             layer.msg("密码错误或用户不存在");
         }
