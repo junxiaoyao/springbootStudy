@@ -5,3 +5,5 @@ spring:
     cache: false
   profiles:
     active: dev
+  jpa:
+    show-sql: true

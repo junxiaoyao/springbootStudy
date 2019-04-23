@@ -3,6 +3,7 @@ package com.jxy.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -14,8 +15,10 @@ import javax.persistence.Table;
 @Table(name = "huser")
 public class JxyUser extends AbstractEntity {
     @Column(name = "user_name")
+    @NotNull
     private String userName;
     @Column(name = "user_pass")
+    @NotNull
     private String userPass;
     @Column(name = "user_role")
     private String userRole;

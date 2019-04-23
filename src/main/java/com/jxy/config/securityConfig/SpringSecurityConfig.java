@@ -43,7 +43,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll()
                 //成功进入主界面
                 // .successForwardUrl("/")
-                .and().authorizeRequests().antMatchers("/").hasRole("ADMIN");
+                .and().authorizeRequests()
+                .antMatchers("/").hasRole("ADMIN")
+                .antMatchers("/getUserById").permitAll()
+                .antMatchers("/getAllUser").permitAll();
 
     }
 }

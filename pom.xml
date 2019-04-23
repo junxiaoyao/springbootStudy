@@ -30,7 +30,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.0.0</version>
+        </dependency>
         <!--&lt;!&ndash; 引入freeMarker的依赖包. &ndash;&gt;-->
         <!--<dependency>-->
         <!--<groupId>org.springframework.boot</groupId>-->
