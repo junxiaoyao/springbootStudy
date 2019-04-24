@@ -15,6 +15,7 @@ import com.jxy.security.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class HomeController {
     @Autowired
     private JxyUserRepository userRepository;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) {
        /* Role role=new Role();
@@ -58,7 +62,14 @@ public class HomeController {
     @RequestMapping("getUserById")
     @ResponseBody
     public JxyUser getUserById(long id) {
+        long tB = System.currentTimeMillis();
         JxyUser user = userRepository.findOne(id);
+        long tE = System.currentTimeMillis();
+        System.out.println("time1:" + (tE - tB));
+        long tB1 = System.currentTimeMillis();
+        jdbcTemplate.execute("select * from huser t where t.id='" + id + "'");
+        long tE1 = System.currentTimeMillis();
+        System.out.println("time2:" + (tE1 - tB1));
         return user;
     }
 
