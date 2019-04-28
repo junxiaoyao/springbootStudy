@@ -1,5 +1,10 @@
 server:
-  port: 80
+  port: 8080
+#  ssl:
+#    key-store: classpath:config/baotian.club.jks
+#    key-store-password: BAOtiandi789
+#    key-store-type: jks
+#    key-alias: baotianclub
 spring:
   thymeleaf:
     cache: false

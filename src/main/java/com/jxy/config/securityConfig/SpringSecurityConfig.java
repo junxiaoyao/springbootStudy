@@ -16,7 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @Description:
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @ComponentScan("com.jxy.security")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -24,7 +24,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(securityService);
+       // auth.userDetailsService(securityService);
     }
 
     @Override
@@ -34,6 +34,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+       // httpSecurity.authorizeRequests().anyRequest().permitAll();
         httpSecurity.formLogin()
                 //　//这里程序登陆页面，允许所有人进行登陆
                 .loginPage("/login").permitAll()
@@ -46,6 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/").hasRole("ADMIN")
                 .antMatchers("/getUserById").permitAll()
+                .antMatchers("/handMessage").permitAll()
                 .antMatchers("/getAllUser").permitAll();
 
     }
