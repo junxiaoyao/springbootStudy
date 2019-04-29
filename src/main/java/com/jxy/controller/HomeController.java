@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -39,9 +41,10 @@ public class HomeController {
     private RoleRepository roleRepository;
     @Autowired
     private JxyUserRepository userRepository;
+    private int size=50;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) {
@@ -67,7 +70,7 @@ public class HomeController {
         long tE = System.currentTimeMillis();
         System.out.println("time1:" + (tE - tB));
         long tB1 = System.currentTimeMillis();
-        jdbcTemplate.execute("select * from huser t where t.id='" + id + "'");
+       // jdbcTemplate.execute("select * from huser t where t.id='" + id + "'");
         long tE1 = System.currentTimeMillis();
         System.out.println("time2:" + (tE1 - tB1));
         return user;
@@ -109,5 +112,17 @@ public class HomeController {
     public String registPost(JxyUser user) {
         userRepository.save(user);
         return "redirect:/login";
+    }
+    @RequestMapping("getSize")
+    @ResponseBody
+    public int loginGet() {
+        return size;
+    }
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

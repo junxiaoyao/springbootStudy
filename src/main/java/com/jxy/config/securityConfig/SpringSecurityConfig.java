@@ -48,7 +48,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").hasRole("ADMIN")
                 .antMatchers("/getUserById").permitAll()
                 .antMatchers("/handMessage").permitAll()
-                .antMatchers("/getAllUser").permitAll();
+                .antMatchers("/getAllUser").permitAll()
+                .antMatchers("/getSize").permitAll();
 
     }
 }
