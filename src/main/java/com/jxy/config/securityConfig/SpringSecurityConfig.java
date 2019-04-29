@@ -24,7 +24,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       // auth.userDetailsService(securityService);
+       auth.userDetailsService(securityService);
     }
 
     @Override
@@ -49,7 +49,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/getUserById").permitAll()
                 .antMatchers("/handMessage").permitAll()
                 .antMatchers("/getAllUser").permitAll()
-                .antMatchers("/getSize").permitAll();
+                .antMatchers("/getSize").permitAll()
+                .anyRequest().permitAll();
 
     }
 }

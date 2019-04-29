@@ -14,6 +14,7 @@ import com.jxy.entity.Role;
 import com.jxy.repository.JxyUserRepository;
 import com.jxy.repository.RoleRepository;
 import com.jxy.security.UserDetail;
+import com.jxy.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +49,7 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) {
+
        /* Role role=new Role();
         role.setUserName("pp");
         role.setRemark("sadasd");
@@ -89,6 +91,7 @@ public class HomeController {
 
     @RequestMapping("login")
     public String loginGet(Model model, String error) {
+         RoleRepository roleRepository2= SpringUtil.getBean(RoleRepository.class);
         model.addAttribute("error", error);
         return "login";
     }
