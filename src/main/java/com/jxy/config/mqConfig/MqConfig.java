@@ -1,19 +1,14 @@
 package com.jxy.config.mqConfig;
 
-import javax.jms.Connection;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.Queue;
-import javax.jms.Session;
 import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
@@ -21,8 +16,11 @@ import org.springframework.jms.support.converter.SimpleMessageConverter;
 @Configuration
 public class MqConfig {
 
-    // @Value("spring.activemq.broker-url")
-    private String serverUrl = "tcp://192.168.8.130:61616";
+    @Value("${spring.activemq.broker-url}")
+    private String serverUrl;
+
+    @Value("${spring.activemq.queue-name}")
+    private String queueName;
 
     @Bean
     public JmsTemplate jmsTemplate(ActiveMQConnectionFactory factory, Queue queue) {
@@ -66,6 +64,6 @@ public class MqConfig {
 
     @Bean
     public Queue queue() {
-        return new ActiveMQQueue("active_springboot_queue");
+        return new ActiveMQQueue(queueName);
     }
 }
