@@ -1,18 +1,71 @@
 package com.jxy.config.mqConfig;
 
-import com.rabbitmq.client.ConnectionFactory;
-import org.springframework.amqp.core.FanoutExchange;
+import javax.jms.Connection;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.Queue;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jms.JmsException;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.listener.DefaultMessageListenerContainer;
+import org.springframework.jms.support.converter.SimpleMessageConverter;
 
+@Configuration
 public class MqConfig {
-   /* @Bean
-    public ConnectionFactory connectionFactory(){
-        ConnectionFactory factory=new ConnectionFactory();
-        factory.setHost("118.24.188.79");
-        return factory;
-    }*/
-    /*public FanoutExchange fanoutExchange(ConnectionFactory factory){
-        FanoutExchange fanoutExchange=new FanoutExchange("fanoutExchange");
 
-    }*/
+    // @Value("spring.activemq.broker-url")
+    private String serverUrl = "tcp://192.168.8.130:61616";
+
+    @Bean
+    public JmsTemplate jmsTemplate(ActiveMQConnectionFactory factory, Queue queue) {
+        JmsTemplate jmsTemplate = new JmsTemplate();
+        jmsTemplate.setConnectionFactory(factory);
+        jmsTemplate.setDefaultDestination(queue);
+        jmsTemplate.setMessageConverter(new SimpleMessageConverter());
+        return jmsTemplate;
+    }
+
+    @Bean
+    public DefaultMessageListenerContainer defaultMessageListenerContainer(ActiveMQConnectionFactory factory,
+        Queue queue, MessageListener messageListener) {
+        DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+        container.setConnectionFactory(factory);
+        container.setDestination(queue);
+        container.setMessageListener(messageListener);
+        return container;
+    }
+
+    @Bean
+    public MessageListener messageListener() {
+        return (message -> {
+            if (message != null && message instanceof TextMessage) {
+                TextMessage textMessage = (TextMessage) message;
+                try {
+                    System.out.println("receive:" + textMessage.getText());
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Bean
+    public ActiveMQConnectionFactory connectionFactory() {
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
+        connectionFactory.setBrokerURL(serverUrl);
+        return connectionFactory;
+    }
+
+    @Bean
+    public Queue queue() {
+        return new ActiveMQQueue("active_springboot_queue");
+    }
 }
