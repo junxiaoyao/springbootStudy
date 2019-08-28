@@ -11,8 +11,4 @@ class HGrovy {
     String home(){
         "login"
     }
-
-    public static void main(String[] args) {
-        println (Runtime.getRuntime().availableProcessors());
-    }
 }
