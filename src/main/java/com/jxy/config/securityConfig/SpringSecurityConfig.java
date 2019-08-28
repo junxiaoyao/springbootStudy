@@ -16,15 +16,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @Description:
  */
 @Configuration
-//@EnableWebSecurity
+// @EnableWebSecurity
 @ComponentScan("com.jxy.security")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private SecurityService securityService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       auth.userDetailsService(securityService);
+        auth.userDetailsService(securityService);
     }
 
     @Override
@@ -34,24 +35,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-       // httpSecurity.authorizeRequests().anyRequest().permitAll();
+        // httpSecurity.authorizeRequests().anyRequest().permitAll();
         httpSecurity.formLogin()
-                //　//这里程序登陆页面，允许所有人进行登陆
-                .loginPage("/login").permitAll()
-                .loginProcessingUrl("/login")
-                //失败重新登录
-                .failureUrl("/login?error=true")
-                .and().logout().permitAll()
-                //成功进入主界面
-                // .successForwardUrl("/")
-                .and().authorizeRequests()
-                .antMatchers("/").hasRole("ADMIN")
-            .antMatchers("/test/**").permitAll()
-                .antMatchers("/getUserById").permitAll()
-                .antMatchers("/handMessage").permitAll()
-                .antMatchers("/getAllUser").permitAll()
-                .antMatchers("/getSize").permitAll()
-                .anyRequest().permitAll();
+            // //这里程序登陆页面，允许所有人进行登陆
+            .loginPage("/login").permitAll().loginProcessingUrl("/login")
+            // 失败重新登录
+            .failureUrl("/login?error=true").and().logout().permitAll()
+            // 成功进入主界面
+            // .successForwardUrl("/")
+            .and().authorizeRequests().antMatchers("/").hasRole("ADMIN").antMatchers("/test/**").permitAll()
+            .antMatchers("/getUserById").permitAll().antMatchers("/handMessage").permitAll().antMatchers("/getAllUser")
+            .permitAll().antMatchers("/getSize").permitAll().anyRequest().permitAll();
 
     }
 }

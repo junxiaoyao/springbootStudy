@@ -23,7 +23,6 @@ import java.util.List;
 public class SecurityService implements UserDetailsService {
     @Autowired
     private JxyUserRepository userRepository;
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         /*UserDetail userDetail = new UserDetail();

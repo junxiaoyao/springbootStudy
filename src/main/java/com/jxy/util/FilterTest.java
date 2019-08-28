@@ -1,6 +1,7 @@
 package com.jxy.util;
 
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -25,7 +26,7 @@ public class FilterTest implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
         throws IOException, ServletException {
-        System.out.println("i am a filter");
+        System.out.println("i am a filter"+new Date().getTime());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
