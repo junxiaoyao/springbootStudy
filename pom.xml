@@ -11,7 +11,7 @@
 
     <properties>
         <druidVersion>1.0.16</druidVersion>
-        <mysqlDriverVersion>8.0.13</mysqlDriverVersion>
+        <mysqlDriverVersion>8.0.16</mysqlDriverVersion>
     </properties>
 
 
